@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "0c7299ed-0a25-4bcf-aca1-2b6a7243fa0e",
+		"name": "Project-Students-Info",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31256172",
+		"_collection_link": "https://www.postman.com/satellite-geologist-46761647/workspace/api-testing-01/collection/31256172-0c7299ed-0a25-4bcf-aca1-2b6a7243fa0e?action=share&source=collection_link&creator=31256172"
+	},
+	"item": [
+		{
+			"name": "Get Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var json=pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status Code is Valid\", function (){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"console.log(json.length)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/studentsDetails",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"st_id\", jsonData.id)\r",
+							"\r",
+							"pm.test(\"Status Code is Valid\", function (){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"first_name\": \"sample string 2\", \r\n\"middle_name\": \"sample string 3\", \r\n\"last_name\": \"sample string 4\", \r\n\"date_of_birth\": \"sample string 5\" \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/studentsDetails",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Specific Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is valid\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const st_id= pm.environment.get(\"st_id\");\r",
+							"pm.test(\"ID is valid\", function () {\r",
+							"    pm.expect(jsonData.data.id).to.eql(st_id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate First Name\", function(){\r",
+							"    pm.expect (jsonData.data.first_name).to.eql(\"sample string 2\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Middle Name\", function(){\r",
+							"    pm.expect (jsonData.data.middle_name).to.eql(\"sample string 3\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Last Name\", function(){\r",
+							"    pm.expect (jsonData.data.last_name).to.eql(\"sample string 4\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Date of Birth\", function(){\r",
+							"    pm.expect (jsonData.data.date_of_birth).to.eql(\"sample string 5\");;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/studentsDetails/{{st_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"{{st_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Technical Skills",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is valid\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"id\": 1, \r\n\"language\": [ \r\n\"sample string 1\", \r\n\"sample string 2\" \r\n], \r\n\"yearexp\": \"sample string 2\", \r\n\"lastused\": \"sample string 3\", \r\n\"st_id\": {{st_id}} \r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/technicalskills",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"technicalskills"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student Address",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status Code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status Code Value Validation\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Includes Status\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"status\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Status Value\", function () {\r",
+							"    pm.expect(jsonData.status).to.eql(\"true\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Includes msg\", function () { \r",
+							"    pm.expect(pm.response.text()).to.include(\"msg\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate msg Value\", function () {\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Add  data success\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"Permanent_Address\": { \r\n\"House_Number\": \"sample string 1\",\r\n\"City\": \"sample string 2\",\r\n \"State\": \"sample string 3\", \r\n\"Country\": \"sample string 4\",\r\n\"PhoneNumber\": [ \r\n{ \r\n\"Std_Code\": \"sample string 1\",\r\n\"Home\": \"sample string 2\",\r\n \"Mobile\": \"sample string 3\" \r\n},\r\n{ \r\n\"Std_Code\": \"sample string 1\",\r\n\"Home\": \"sample string 2\", \r\n\"Mobile\": \"sample string 3\" \r\n} \r\n] \r\n},\r\n\"stId\": {{st_id}}\r\n} \r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/addresses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Final Student Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//Language, Year of Experience, House Number, City, Country, Mobile, Current Address\r",
+							"\r",
+							"pm.test(\"Validate Language\", function(){\r",
+							"    pm.expect (jsonData.data.TechnicalDetails[0].language[0]).to.eql(\"sample string 1\");\r",
+							"    pm.expect (jsonData.data.TechnicalDetails[0].language[1]).to.eql(\"sample string 2\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Year of Experience\", function(){\r",
+							"    pm.expect (jsonData.data.TechnicalDetails[0].yearexp).to.eql(\"sample string 2\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate House Number\", function(){\r",
+							"    pm.expect (jsonData.data.Address[0].Permanent_Address.House_Number).to.eql(\"sample string 1\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate City\", function(){\r",
+							"    pm.expect (jsonData.data.Address[0].Permanent_Address.City).to.eql(\"sample string 2\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Country\", function(){\r",
+							"    pm.expect (jsonData.data.Address[0].Permanent_Address.Country).to.eql(\"sample string 4\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Mobile\", function(){\r",
+							"    pm.expect (jsonData.data.Address[0].Permanent_Address.PhoneNumber[0].Mobile).to.eql(\"sample string 3\");\r",
+							"     pm.expect (jsonData.data.Address[0].Permanent_Address.PhoneNumber[1].Mobile).to.eql(\"sample string 3\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Current Address\", function(){\r",
+							"    pm.expect (jsonData.data.Address[0].Current_Address).to.eql(null);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/FinalStudentDetails/{{st_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"FinalStudentDetails",
+						"{{st_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://thetestingworldapi.com",
+			"type": "string"
+		}
+	]
+}
