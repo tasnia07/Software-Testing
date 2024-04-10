@@ -1,2 +1,3 @@
 # Software-Testing
-Diligent, aspirational and optimistic individual,having passion for Software Quality Assurance to ensure software excellence. Ready to take up any challenge and learn along the way with honing my skills in Software Testing to contribute effectively to the success of software development projects.
+To detect and identify the defects in the software.
+The objective of testing is to release a quality product to the client.
