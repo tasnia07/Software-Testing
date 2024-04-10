@@ -1,0 +1,3 @@
+jmeter -n -t Hotel_Management_T100.jmx -l report\Hotel_Management_T100.jtl
+
+jmeter -g report\Hotel_Management_T100.jtl -o report\Hotel_Management_T100.html
